@@ -1,9 +1,9 @@
-package com.company;
 
 public interface LanguageTemplate {
 	
-	String	forgetPasswordTemplate(String a);
-	String	verificationPasswordTemplate(String b);
-	String	OrderConfirmationTemplate(String c, String d );
+	public void addTemplete(String messageType, String message);
+	public void updateTemplate(String messageType, String newMessage);
+	public String readTemplate(String messageType);
+	public void deleteTemplate(String messageType);
 	
 }
