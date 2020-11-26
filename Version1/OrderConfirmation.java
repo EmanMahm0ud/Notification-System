@@ -1,4 +1,4 @@
-package main;
+import java.text.MessageFormat;
 
 public class OrderConfirmation implements Notification {
 
@@ -7,7 +7,10 @@ public class OrderConfirmation implements Notification {
 		// TODO Auto-generated method stub
 		Shopper sUser = (Shopper) user;
 		
-		System.out.println("Dear" + sUser.getUserName() + " , your booking of the order " + sUser.getLastOrder().getorderCode()+" is confirmed. thanks for using our store ");
+		String message = user.getLanguageTemp().readTemplate("order confirmation");
+		String finalTemplate = MessageFormat.format(message, user.getUserName(), sUser.getUserName(), sUser.getLastOrder().getOrder(), sUser.getLastOrder().getorderCode());
+		
+		user.getChannels().sendNotification(finalTemplate);
 
 	}
 
