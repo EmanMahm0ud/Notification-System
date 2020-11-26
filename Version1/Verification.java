@@ -1,5 +1,4 @@
-package main;
-
+import java.text.MessageFormat;
 import java.util.Random;
 
 public class Verification implements Notification {
@@ -9,9 +8,12 @@ public class Verification implements Notification {
 		// TODO Auto-generated method stub
 		
 		Random r = new Random();
-        int vCode = r.nextInt((100000 - 10000) + 1) + 10000;
+        Integer vCode = r.nextInt((100000 - 10000) + 1) + 10000;
 		
-		System.out.println("Dear " + user.getUserName() + ", your verification code is " + r);
+		String message = user.getLanguageTemp().readTemplate("verification");
+		String finalTemplate = MessageFormat.format(message, user.getUserName(), vCode.toString());
+		
+		user.getChannels().sendNotification(finalTemplate);
 
 	}
 
