@@ -1,5 +1,4 @@
-package main;
-
+import java.text.MessageFormat;
 import java.util.Random;
 
 public class ForgetPassword implements Notification {
@@ -9,9 +8,12 @@ public class ForgetPassword implements Notification {
 		// TODO Auto-generated method stub
 		
 		Random r = new Random();
-        int tPass = r.nextInt((100000 - 10000) + 1) + 10000;
+        	Integer code = r.nextInt((100000 - 10000) + 1) + 10000;
 		
-		System.out.println("Dear " + user.getUserName() + ", your temporary password is " + r);
+		String message = user.getLanguageTemp().readTemplate("forget password");
+		String finalTemplate = MessageFormat.format(message, user.getUserName(), code.toString());
+		
+		user.getChannels().sendNotification(finalTemplate);
 		
 	}
 
