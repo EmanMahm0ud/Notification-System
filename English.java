@@ -1,30 +1,71 @@
-package com.company;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Scanner;
 
 public class English implements LanguageTemplate {
 
+	private String notificationType;
+	private String message;
+	
+	private HashMap<String, String>EnglishTemplates = new HashMap<>();
+	
 	public English() {
 		// TODO Auto-generated constructor stub
+		readFile();
 	}
-
-	@Override
-	public String forgetPasswordTemplate(String Email) {
-		String message = "hi " + Email + "please enter your new password and confirm it again.";
-		// TODO Auto-generated method stub
-		return message;
+	
+	private void readFile() {
+		File file = new File("English.txt");
+		Scanner fileReader;
+		String data;
+		try {
+			fileReader = new Scanner(file);
+			while (fileReader.hasNextLine()) {
+				data = fileReader.nextLine();
+				notificationType = data;
+				data = fileReader.nextLine();
+				message = data;
+				addTemplete(notificationType, message);
+			}
+			fileReader.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
-
-	@Override
-	public String verificationPasswordTemplate(String userName) {
-		String message = "Hi " + userName + "thank you for Signing up :)";
-		// TODO Auto-generated method stub
-		return message;
+	
+	private void writeFile() {
+		File file = new File("English.txt");
+		try {
+			FileWriter fileWriter = new FileWriter(file);
+			for (HashMap.Entry<String, String> temp : EnglishTemplates.entrySet()) {
+				fileWriter.write(temp.getKey() + "\n" + temp.getValue() + "\n");
+			}
+		    fileWriter.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-
-	@Override
-	public String OrderConfirmationTemplate(String userName, String orderItem) {
-		String message = "Dear " + userName + "your booking of the " + " orderItem + is confirmed. thanks for using our store :)"; 
-		// TODO Auto-generated method stub
-		return message;
+	
+	public void addTemplete(String messageType, String message) {
+		EnglishTemplates.put(messageType, message);
+		writeFile();
+	}
+	
+	public void updateTemplate(String messageType, String newMessage) {
+		EnglishTemplates.replace(messageType, newMessage);
+	}
+	
+	public String readTemplate(String messageType) {
+		return EnglishTemplates.get(messageType);
+	}
+	
+	public void deleteTemplate(String messageType) {
+		EnglishTemplates.remove(messageType);
+		writeFile();
 	}
 
 }
