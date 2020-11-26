@@ -1,4 +1,3 @@
-package main;
 
 import java.util.ArrayList;
 
@@ -10,6 +9,14 @@ public class Order {
 	public void addItem(Item item)
 	{
 		items.add(item);
+	}
+	
+	public String getOrder() {
+		String order = "";
+		for (int i = 0 ; i < items.size() ; i++) {
+			order = items.get(items.size()-1).getItemName() + "\n";
+		}
+		return order;
 	}
 	
 	public String getorderCode()
