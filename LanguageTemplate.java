@@ -8,19 +8,25 @@ import java.util.Scanner;
 public class LanguageTemplate {
 	private String notificationType;
 	private String message;
-	
+	private String fileName;
 	private HashMap<String, String>LanguageTemplates = new HashMap<>();
 	
 	public LanguageTemplate() {
 		
 	}
 	
-	public LanguageTemplate(String fileName) {
+	
+	public LanguageTemplate(fileName) {
 		// TODO Auto-generated constructor stub
 		readFile(fileName);
 	}
 	
-	private void readFile(String fileName) {
+	public void setFile(String filename) {
+		// TODO Auto-generated constructor stub
+		this.fileName=filename;
+	}
+	
+	private void readFile(fileName) {
 		File file = new File(fileName);
 		Scanner fileReader;
 		String data;
@@ -40,7 +46,7 @@ public class LanguageTemplate {
 	}
 	
 	private void writeFile() {
-		File file = new File("English.txt");
+		File file = new File(fileName);
 		try {
 			FileWriter fileWriter = new FileWriter(file);
 			for (HashMap.Entry<String, String> temp : LanguageTemplates.entrySet()) {
@@ -56,10 +62,12 @@ public class LanguageTemplate {
 	public void addTemplete(String messageType, String message) {
 		LanguageTemplates.put(messageType, message);
 		writeFile();
+		status(1);
 	}
 	
 	public void updateTemplate(String messageType, String newMessage) {
 		LanguageTemplates.replace(messageType, newMessage);
+		status(2);
 	}
 	
 	public String readTemplate(String messageType) {
@@ -69,5 +77,26 @@ public class LanguageTemplate {
 	public void deleteTemplate(String messageType) {
 		LanguageTemplates.remove(messageType);
 		writeFile();
+		status(3);
+	}
+	public void status (int n)
+	{
+		switch(n)
+		{
+		case 1:
+			System.out.println("Language template added succefully");
+			break;
+		case 2:
+			System.out.println("Language template updated succefully");
+			break;
+		case 3:
+			System.out.println("Language template removed succefully");
+			break;
+		case 4:
+			System.out.println("File name is not correct( File not exist)");
+			break;
+			
+		}
+		
 	}
 }
