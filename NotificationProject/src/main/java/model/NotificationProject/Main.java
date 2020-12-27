@@ -16,18 +16,21 @@ public class Main {
 		NotificationSystem notification = new NotificationSystem();
 		notification.addNotification(nTemplate);
 		
-//		e.addTemplete("forget password", "Dear {0}, your temporary password is {1}. Thanks for using our store.");
-//		
-//		e.addTemplete("order confirmation", "Dear {0}, your booking of the order {1} with order code {2} is confirmed. Thanks for using our store.");
-//		
-//		e.addTemplete("verification", "Dear {0}, your verification code is {1}. Thanks for using our store.");
-//		
-//		e.addTemplete("order confirmation", "Hi {0}, how are you ");
-//		
-//		String s = e.readTemplate("order confirmation");
-//		System.out.println(s);
+		nTemplate.setId(2);
+		nTemplate.setSubject("order confirmation");
+		nTemplate.setContent("Dear {0}, your booking of the order {1} with order code {2} is confirmed. Thanks for using our store.");
+		nTemplate.setLanguage(LanguageEnum.English);
 		
-		Channel channels = new SMS();
+		notification.addNotification(nTemplate);
+		
+		nTemplate.setId(3);
+		nTemplate.setSubject("verification");
+		nTemplate.setContent("Dear {0}, your verification code is {1}. Thanks for using our store.");
+		nTemplate.setLanguage(LanguageEnum.English);
+
+		notification.addNotification(nTemplate);
+		
+		Channel channels = new Email();
 		
 		User user = new Shopper();
 		user.setUserName("eman");
@@ -35,5 +38,20 @@ public class Main {
 		
 		Notification n = new ForgetPassword();
 		n.sendNotification(user, 1);
+		
+		n = new OrderConfirmation();
+		n.sendNotification(user, 2);
+		
+		n = new Verification();
+		n.sendNotification(user, 3);
+		
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		user.getChannels().setOnline(true);
 	}
 }
