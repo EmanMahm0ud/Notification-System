@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -19,6 +20,11 @@ import jakarta.ws.rs.core.MediaType;
 public class NotificationSystem implements NotificationService {
 	
 	private static Map<Integer,NotificationTemplate> NotificationTemplates = new HashMap();
+	
+	@Inject
+	public NotificationSystem() {
+		getAllNotifications();
+	}
 	
 	@POST
 	@Path("/add")
@@ -67,31 +73,28 @@ public class NotificationSystem implements NotificationService {
 		connection.updateNotification(id, notification);
 		NotificationTemplates.replace(id, notification);
 		status.setStatus(true);
-		status.setMessage("Notification created successfully!");
+		status.setMessage("Notification updated successfully!");
 		return status;
 	}
 	
 	@GET
 	@Path("/{id}/search")
-	public String searchNotification(@PathParam("id") int id) {
+	public Status searchNotification(@PathParam("id") int id) {
 		Status status = new Status();
 		if(NotificationTemplates.get(id) == null){
 			status.setStatus(false);
 			status.setMessage("Notification is not found!");
-			return "Notification is not found!";
+			return status;
 		} else {
 			status.setStatus(true);
 			status.setMessage("Notification is found!");
-			return "Notification is found!";
+			return status;
 		}
 	}
 	
 	@GET
 	@Path("/{id}/getOne")
 	public NotificationTemplate getNotification(@PathParam("id") int id) {
-		if(NotificationTemplates.get(id) == null){
-			System.out.println("Notification is not found!");
-		}
 		NotificationTemplate notification = new NotificationTemplate();
 		NotificationConnection connection = new NotificationConnection();
 		notification = connection.getNotification(id);
