@@ -1,5 +1,8 @@
 package model.NotificationProject;
 
 public interface Channel {
-	public void sendNotification(String finalMessage);
+	public boolean isOnline();
+	public void setOnline(boolean online);
+	public void addNotificationToQueue(String finalMessage);
+	public void sendNotification();
 }

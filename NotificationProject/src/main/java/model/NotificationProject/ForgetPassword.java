@@ -16,7 +16,7 @@ public class ForgetPassword implements Notification {
 		String message = notification.getNotification(id).getContent();
 		String finalTemplate = MessageFormat.format(message, user.getUserName(), code.toString());
 		
-		user.getChannels().sendNotification(finalTemplate);
+		user.getChannels().addNotificationToQueue(finalTemplate);
 		
 	}
 

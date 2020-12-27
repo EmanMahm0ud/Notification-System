@@ -4,6 +4,11 @@ public class Item {
 	
 	private String itemName;
 	private String itemID;
+	
+	Item(){
+		itemName = "item";
+		itemID = "1";
+	}
 	public String getItemName() {
 		return itemName;
 	}
