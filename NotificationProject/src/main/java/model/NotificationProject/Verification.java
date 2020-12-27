@@ -16,7 +16,7 @@ public class Verification implements Notification {
 		String message = notification.getNotification(id).getContent();
 		String finalTemplate = MessageFormat.format(message, user.getUserName(), vCode.toString());
 		
-		user.getChannels().sendNotification(finalTemplate);
+		user.getChannels().addNotificationToQueue(finalTemplate);
 
 	}
 
