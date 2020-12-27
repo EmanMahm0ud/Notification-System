@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>model</groupId>
-    <artifactId>NotificationSystem</artifactId>
+    <artifactId>NotificationProject</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <name>NotificationSystem</name>
+    <name>NotificationProject</name>
 
     <build>
-        <finalName>NotificationSystem</finalName>
+        <finalName>NotificationProject</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
