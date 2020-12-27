@@ -1,18 +1,8 @@
 package model.NotificationProject;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Random;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class NotificationConnection {
 	Connection conn = null;
@@ -27,7 +17,7 @@ public class NotificationConnection {
 		
 	
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/NotificationSystem", "root", "password");       
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/NotificationSystem", "root", "eman1210");       
             
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -59,7 +49,6 @@ public class NotificationConnection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.print(notify.size());
 		return notify;
 	}
 	
