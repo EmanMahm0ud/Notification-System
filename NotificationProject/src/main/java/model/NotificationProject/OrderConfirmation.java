@@ -11,9 +11,9 @@ public class OrderConfirmation implements Notification {
 		
 		NotificationSystem notification = new NotificationSystem();
 		String message = notification.getNotification(id).getContent();
-		String finalTemplate = MessageFormat.format(message, user.getUserName(), sUser.getUserName(), sUser.getLastOrder().getOrder(), sUser.getLastOrder().getorderCode());
+		String finalTemplate = MessageFormat.format(message, sUser.getUserName(), sUser.getLastOrder().getOrder(), sUser.getLastOrder().getorderCode());
 		
-		user.getChannels().sendNotification(finalTemplate);
+		user.getChannels().addNotificationToQueue(finalTemplate);
 
 	}
 
