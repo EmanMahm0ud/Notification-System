@@ -7,6 +7,12 @@ public class Order {
 	private ArrayList<Item> items;
 	private String orderCode;
 	
+	Order(){
+		items = new ArrayList();
+		items.add(new Item());
+		orderCode = "123";
+	}
+	
 	public void addItem(Item item)
 	{
 		items.add(item);
@@ -15,7 +21,7 @@ public class Order {
 	public String getOrder() {
 		String order = "";
 		for (int i = 0 ; i < items.size() ; i++) {
-			order = items.get(items.size()-1).getItemName() + "\n";
+			order = items.get(items.size()-1).getItemName() + " ";
 		}
 		return order;
 	}
